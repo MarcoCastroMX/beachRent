@@ -17,10 +17,10 @@ public class RentalService {
     // Crear un nuevo alquiler
     public RentalResponseDTO create(RentalRequestDTO req) {
         Rental rental = new Rental();
-        rental.setProductId(req.getProductId());
-        rental.setCustomerName(req.getCustomerName());
-        rental.setStartTime(req.getStartTime());
-        rental.setEndTime(req.getEndTime());
+        rental.setProductId(req.productId());
+        rental.setCustomerName(req.customerName());
+        rental.setStartTime(req.startTime());
+        rental.setEndTime(req.endTime());
         rental = rentalRepo.save(rental);
         return toResp(rental);
     }
@@ -48,13 +48,7 @@ public class RentalService {
 
     // Método auxiliar para mapear Rental → RentalResponseDTO
     private RentalResponseDTO toResp(Rental rental) {
-        RentalResponseDTO rentalResp = new RentalResponseDTO();
-        rentalResp.setId(rental.getId());
-        rentalResp.setProductId(rental.getProductId());
-        rentalResp.setCustomerName(rental.getCustomerName());
-        rentalResp.setStartTime(rental.getStartTime());
-        rentalResp.setEndTime(rental.getEndTime());
-        rentalResp.setStatus(rental.getStatus().name());
-        return rentalResp;
+
+        return new RentalResponseDTO(rental.getId(),rental.getProductId(),rental.getCustomerName(),rental.getStartTime(),rental.getEndTime(),rental.getStatus().name());
     }
 }

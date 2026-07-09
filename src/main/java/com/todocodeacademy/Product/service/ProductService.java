@@ -61,13 +61,7 @@ public class ProductService {
 
     // Método auxiliar para mapear Product → ProductResponseDTO
     private ProductResponseDTO toResp(Product product) {
-        ProductResponseDTO prodResp = new ProductResponseDTO();
-        prodResp.setId(product.getId());
-        prodResp.setName(product.getName());
-        prodResp.setCategory(product.getCategory());
-        prodResp.setStock(product.getStock());
-        prodResp.setPricePerHour(product.getPricePerHour());
-        prodResp.setActive(product.isActive());
-        return prodResp;
+
+        return new ProductResponseDTO(product.getId(),product.getName(),product.getCategory(),product.getStock(),product.getPricePerHour(),product.isActive());
     }
 }
