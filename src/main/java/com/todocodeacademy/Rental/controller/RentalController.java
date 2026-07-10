@@ -3,6 +3,7 @@ package com.todocodeacademy.Rental.controller;
 import com.todocodeacademy.Rental.dto.RentalRequestDTO;
 import com.todocodeacademy.Rental.dto.RentalResponseDTO;
 import com.todocodeacademy.Rental.service.RentalService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class RentalController {
 
     // Endpoint para crear un alquiler
     @PostMapping
-    public RentalResponseDTO create(@RequestBody RentalRequestDTO req) {
+    public RentalResponseDTO create(@Valid @RequestBody RentalRequestDTO req) {
         return service.create(req);
     }
 

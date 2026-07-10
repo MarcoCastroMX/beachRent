@@ -1,4 +1,7 @@
 package com.todocodeacademy.Rental.dto;
+import com.todocodeacademy.validation.onUpdate;
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 public record RentalResponseDTO(
@@ -9,5 +12,5 @@ public record RentalResponseDTO(
         LocalDateTime endTime,
         String status
 ) {
-   
+
 }

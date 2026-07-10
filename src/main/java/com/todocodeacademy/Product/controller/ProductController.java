@@ -3,9 +3,14 @@ package com.todocodeacademy.Product.controller;
 import com.todocodeacademy.Product.dto.ProductRequestDTO;
 import com.todocodeacademy.Product.dto.ProductResponseDTO;
 import com.todocodeacademy.Product.service.ProductService;
+import com.todocodeacademy.validation.onCreate;
+import com.todocodeacademy.validation.onUpdate;
+import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -24,7 +29,7 @@ public class ProductController {
 
     // Endpoint para crear un producto
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> create(@RequestBody ProductRequestDTO req) {
+    public ResponseEntity<ProductResponseDTO> create(@Validated({onCreate.class, Default.class}) @RequestBody ProductRequestDTO req) {
         URI location = URI.create("/api/products");
 
         return ResponseEntity.created(location).body(service.create(req));
@@ -32,7 +37,7 @@ public class ProductController {
 
     // Endpoint para actualizar un producto por id
     @PutMapping("/{id}")
-    public ProductResponseDTO update(@PathVariable Long id, @RequestBody ProductRequestDTO req) {
+    public ProductResponseDTO update(@PathVariable Long id, @Validated({onUpdate.class, Default.class}) @RequestBody ProductRequestDTO req) {
         return service.update(id, req);
     }
 
